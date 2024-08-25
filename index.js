@@ -178,18 +178,217 @@
 // tambien de esta forma se puede frenar un setInterval...
 
 
-console.log("inicio");
+// console.log("inicio");
 
-const fin = setTimeout (() => {
-    console.log("fin");
+// const fin = setTimeout (() => {
+//     console.log("fin");
     
-}, 2000)
+// }, 2000)
 
-clearTimeout(fin);
+// clearTimeout(fin);
 
 // de esta manera el setTimeout nunca llegara a ejcutarse.
 // se puede usar si nosotros mandamos a un usuario informacion por ejemplo de las facturas.
 // y si hay un error ponderemos un crearTimeout para que deje de mandarlo hasta que se arregle el problema.
+
+
+// PROMESAS
+
+//la estructura de las promesas new Promise le pasamos entre parentesis resolver coma y el rejet seguido de un arrow function.
+//  new Promise((resolve, reject) => {
+//     cuerpo de la promesa
+//  }) el nombre de resolver y reject pueden ser cualquier palabra
+
+// creamos una funcion
+
+// const eventoFuturo = () => {
+//     return new Promise((resolve, reject) => {
+//         resolve();
+//     });
+// };
+
+// console.log(eventoFuturo());
+
+// esto me va a dar como reultado una promesa indefine, 
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+//         if (valor) {
+//             resolve("promesa resuelta");
+//         }else {
+//             reject("promesa rechazada");
+//         }
+//     });
+// };
+
+// console.log(eventoFuturo(true));
+
+// en este caso la promesa se resuelva con el valor, en el caso de mercado libre, la promesa se resuelve cuando se resive el paquete
+
+// en resuelve se podria poner un arreglo por ejemplo
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+//         if (valor) {
+//             resolve(["andres", "german"]);
+//         }else {
+//             reject("promesa rechazada");
+//         }
+//     });
+// };
+
+// console.log(eventoFuturo(true));
+
+// en este caso se va a recibir la promesa con el arreglo que le pasamos, ya que le pasamos en la funcion como parametro true.
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+//         if (valor) {
+//             resolve(["andres", "german"]);
+//         }else {
+//             reject("promesa rechazada");
+//         }
+//     });
+// };
+
+// console.log(eventoFuturo(false));
+
+// en este caso le pasamos false y se rechazo la
+// y hay un error para que nos demos cuenta que a promesa se rechazo
+
+// la podemos optimzar el if de esta manera
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+
+//         valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//     });
+// };
+
+// console.log(eventoFuturo(true));
+
+//then y cach
+// then lo que hace en las promesas recibe la respuesta exitosa
+// cach recibe el error y no explota, y hace que no explote.
+
+//promesa resuelta
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+
+//         valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//     });
+// };
+
+// eventoFuturo(true).then( (response) => {
+//     console.log(response);
+// }).catch((error) => {
+//     console.log(error);
+    
+// })
+
+// promesa en rechazada, ya no nos va a salir el error al ser la promesa rechada
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+
+//         valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//     });
+// };
+
+// eventoFuturo(false).then( (response) => {
+//     console.log(response);
+// }).catch((error) => {
+//     console.log(error);
+    
+// })
+
+// o sea que si es true va a entrar en el then yn si es false vca a entrar en el cach
+
+//finally siempre se va recibir
+
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+
+//         valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//     });
+// };
+
+// eventoFuturo(true).then( (response) => {
+//     console.log(response);
+// }).catch((error) => {
+//     console.log(error);
+    
+// })
+// .finally(() => {
+//     console.log("proceso terminado");
+    
+// })
+
+
+// el resultado de esto con true o con false dara el proceso terminado con el finally
+
+//Para que nos demos cuenta de la asincronia, como dara resultado este ejecicio??
+
+// const eventoFuturo = (valor) => {
+//     return new Promise((resolve, reject) => {
+
+//         valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//     });
+// };
+
+// eventoFuturo(true).then( (response) => {
+//     console.log(response);
+// }).catch((error) => {
+//     console.log(error);
+    
+// })
+// .finally(() => {
+//     console.log("proceso terminado");
+    
+// })
+
+// console.log("hola");
+
+// el rsultado dara como resultado, primero el hola, despues el el false o el true y por ultimo el finally
+// debido al call Stack
+
+// y si al hola lo ponemos dentro de una funcion asincrona no saldra primero
+
+const eventoFuturo = (valor) => {
+        return new Promise((resolve, reject) => {
+    
+            valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+        });
+    };
+    
+    eventoFuturo(true).then( (response) => {
+        console.log(response);
+        console.log("hola");
+    }).catch((error) => {
+        console.log(error);
+        
+    })
+    .finally(() => {
+        console.log("proceso terminado");
+        
+    })
+    
+// el resultado ahora de el ejeciccio dara como resultado el resuelta, seguido del hola y finalmente el finally
+
+// entonces el then recibe una funcion y el cach recibe un error, y evita que explote la funcion, y el finally recibe alos dos.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
