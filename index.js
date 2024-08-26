@@ -356,33 +356,134 @@
 
 // y si al hola lo ponemos dentro de una funcion asincrona no saldra primero
 
-const eventoFuturo = (valor) => {
-        return new Promise((resolve, reject) => {
+// const eventoFuturo = (valor) => {
+//         return new Promise((resolve, reject) => {
     
-            valor ? resolve("promesa resuelta") : reject("promesa rechazada");
-        });
-    };
+//             valor ? resolve("promesa resuelta") : reject("promesa rechazada");
+//         });
+//     };
     
-    eventoFuturo(true).then( (response) => {
-        console.log(response);
-        console.log("hola");
-    }).catch((error) => {
-        console.log(error);
+//     eventoFuturo(true).then( (response) => {
+//         console.log(response);
+//         console.log("hola");
+//     }).catch((error) => {
+//         console.log(error);
         
-    })
-    .finally(() => {
-        console.log("proceso terminado");
+//     })
+//     .finally(() => {
+//         console.log("proceso terminado");
         
-    })
+//     })
     
 // el resultado ahora de el ejeciccio dara como resultado el resuelta, seguido del hola y finalmente el finally
 
 // entonces el then recibe una funcion y el cach recibe un error, y evita que explote la funcion, y el finally recibe alos dos.
 
+// ejemplo, hacemos una constante con productos que esta en otro pais, hacemos un array, el id, nombre y precio.
+// y creamos una funcion que nos traiga los productos, traemos losm datos, en el retorno poenmos una nueva promesa,
+// con el retur y el rejet, con el setTimeout, en la arrow function resolve los productos, en 3 segundos.
+//al final invocamos la funcion, y si por alguna razon algo falla en la pagina donde pido la promesa,
+// hacemos un console.log de la respues con el then y del error con el cach.
+// el then y el cach van dentro cuando invocamos la funcion y cerramos al final con el punto y coma.
 
 
 
+// const productos = [
+//     {id: 1, nombre: "camisa", precio: 100},
+//     {id: 2, nombre: "pantalon", precio: 100},
+//     {id: 3, nombre: "gorra", precio: 100},
+//     {id: 4, nombre: "zapato", precio: 100},
+// ];
 
+
+// const traerDatos = () => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//                 resolve(productos)
+//         }, 3000)
+//     });
+// };
+
+// traerDatos()
+// .then(response => console.log(response))
+// .catch(response => console.log(error)
+// );
+
+// esto me dara como resultado despues de tres segundo, me apareceran los productos que acabo de pedir en la promesa
+// asi se trae la informacion de datos de un servidor real
+// si resulta que sucede un error, el cach lo va a capta para que no explote la pagina.
+// por las dudas que yo traigo informacion de una Api por ejemplo.
+
+
+// const productos = [
+//     {id: 1, nombre: "camisa", precio: 100},
+//     {id: 2, nombre: "pantalon", precio: 100},
+//     {id: 3, nombre: "gorra", precio: 100},
+//     {id: 4, nombre: "zapato", precio: 100},
+// ];
+
+
+// const traerDatos = () => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             reject("error");
+//         }, 3000)
+//     });
+// };
+
+// traerDatos()
+// .then(response => console.log(response))
+// .catch(error => console.log(error));
+
+
+// en el ejecicio anterior en el setTimeout pusimos resolve() y entre los parentesis los productos.
+// y ahora pusimos reject y dentro la palabra "error" entre comillas.
+// esto hara que la pagina no explote. y dara com o resultado error.
+
+
+// vamos a poner la informacion que queremos en la pagina
+
+const productos = [
+    {id: 1, nombre: "camisa", precio: 100},
+    {id: 2, nombre: "pantalon", precio: 100},
+    {id: 3, nombre: "gorra", precio: 100},
+    {id: 4, nombre: "zapato", precio: 100},
+];
+
+
+const traerDatos = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(productos);
+        }, 3000)
+    });
+};
+
+traerDatos()
+.then(response => {
+    response.forEach(item => {
+        let div = document.createElement("div");
+        div.innerHTML = `
+                    <h2>id: ${item.id}</h2>
+                    <p>nombre: ${item.nombre}</p>
+                    <p>$ ${item.precio}</p>
+        `;
+
+        document.body.append(div);
+    })
+})
+.catch(error => console.log(error));
+
+// creamos la funcion traer datos, donde retorna una nueva promesa, en esta promesa poenmos un
+// setTimeout, dentro pondremos resolve con los productos   ue queremos traer, en la arrow function
+// del then vamos a hacer un forEach y dentro del forEach vamnos a poner el item, que representa a cada
+// producto, seguimos con crear una variable let con el div, dond pondremos los productos que queremos 
+// que aparescan en el sitio, que sea igual a document.createElemenet y dentro el div, segiuido del 
+// div.innerHTML y este sera igual a como queremos que se ubique la informacion de los productoa¿s a traer.
+//  ponemos los bactic con un h2 dentro de este h2 con el nombre del id seguido ${} dentro de las llaves el item con el id
+// desoues de la misma manera el nombre con la etiqueta p de parrafo y el precio con una etiqueta b ´por ejemplo.
+// y cuando cerramos los bactic, llamaremos com un  padre, que sera document.body, a estos le pondremos el 
+// append y dentro de este el div, todo esto hara que renderise la informacion de los productos.
 
 
 
