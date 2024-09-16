@@ -443,36 +443,36 @@
 
 // vamos a poner la informacion que queremos en la pagina
 
-const productos = [
-    {id: 1, nombre: "camisa", precio: 100},
-    {id: 2, nombre: "pantalon", precio: 100},
-    {id: 3, nombre: "gorra", precio: 100},
-    {id: 4, nombre: "zapato", precio: 100},
-];
+// const productos = [
+//     {id: 1, nombre: "camisa", precio: 100},
+//     {id: 2, nombre: "pantalon", precio: 100},
+//     {id: 3, nombre: "gorra", precio: 100},
+//     {id: 4, nombre: "zapato", precio: 100},
+// ];
 
 
-const traerDatos = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(productos);
-        }, 3000)
-    });
-};
+// const traerDatos = () => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve(productos);
+//         }, 3000)
+//     });
+// };
 
-traerDatos()
-.then(response => {
-    response.forEach(item => {
-        let div = document.createElement("div");
-        div.innerHTML = `
-                    <h2>id: ${item.id}</h2>
-                    <p>nombre: ${item.nombre}</p>
-                    <p>$ ${item.precio}</p>
-        `;
+// traerDatos()
+// .then(response => {
+//     response.forEach(item => {
+//         let div = document.createElement("div");
+//         div.innerHTML = `
+//                     <h2>id: ${item.id}</h2>
+//                     <p>nombre: ${item.nombre}</p>
+//                     <p>$ ${item.precio}</p>
+//         `;
 
-        document.body.append(div);
-    })
-})
-.catch(error => console.log(error));
+//         document.body.append(div);
+//     })
+// })
+// .catch(error => console.log(error));
 
 // creamos la funcion traer datos, donde retorna una nueva promesa, en esta promesa poenmos un
 // setTimeout, dentro pondremos resolve con los productos   ue queremos traer, en la arrow function
@@ -484,6 +484,116 @@ traerDatos()
 // desoues de la misma manera el nombre con la etiqueta p de parrafo y el precio con una etiqueta b ´por ejemplo.
 // y cuando cerramos los bactic, llamaremos com un  padre, que sera document.body, a estos le pondremos el 
 // append y dentro de este el div, todo esto hara que renderise la informacion de los productos.
+
+// codigo Sincrono Bloqueante
+
+(() => {
+    console.log("codigo Sincrono");
+    console.log("inicio");
+    
+    function dos(){
+        console.log("Dos");     
+    }  
+    function uno(){
+        console.log("Uno"); 
+    dos();
+        console.log("Tres");           
+    }  
+    uno();
+    console.log("Fin");
+
+})();
+// cada event loops de log se ejecuta, uno a uno sin interrupciones, aca vamos a ver como se ejecutan de a uno, cuan entra y salen las peticiones,
+//Vamos a ver como se va ejecutando, que entra al loop primero y que entra ultimo.
+
+// codigo Sincrono Bloqueante
+
+// se jecuta primero 
+//"codigo Sincrono"
+//"inicio"
+// uno();
+//porque es declarada ultima
+//dos();
+//porque es la la que declaro despues
+//y por ultimo el 
+//"Tres"
+// y por ultimo
+// "Fin"
+
+
+// codigo Asincrono No Bloqueante
+
+(() => {
+    console.log("codigo Asincrono");
+    console.log("inicio");
+    
+    function dos(){
+       setTimeout(function(){
+            console.log("Dos"); 
+       }, 1000)    
+    }  
+    function uno(){
+        setTimeout(function(){
+            console.log("Uno");
+        }, 0);
+    dos();
+            console.log("Tres");           
+    }  
+    uno();
+    console.log("Fin");
+
+})();
+
+// en estas funciones por logica tendria que respetar lo mismo que hicimos anteriormente
+// y pusimos lo primero sincrono sin tiempo y la uno con 0 time y la dos con 1 segundo
+
+// de la manera que aparece cuadno es asincrono es
+// primero
+//"codigo ASincrono"
+//"inicio"
+//"Tres"
+// "Fin"
+//porque es declarada ultima
+//porque es la la que declaro despues
+//y por ultimo el 
+// uno();
+// y por ultimo
+//dos();
+
+// ejecuta 
+//"codigo ASincrono"
+//despues
+//"inicio"
+//siguiente 
+// uno();
+// pero aca como es asincrono espera  ya que tiene un  setTimeout
+// y espera a que se sigan ejecutando  y esta esperan en el call back
+//siguiente
+//dos();
+// pero aca como es asincrono espera  ya que tiene un  setTimeout
+// y espera a que se sigan ejecutando y esta esperan en el call back
+// siguiente
+//"Tres"
+// "Fin"
+// cuando pasan todas salen del call back las que estaban en espera y se jecuatan finalmente
+//"uno"
+// "dos"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
