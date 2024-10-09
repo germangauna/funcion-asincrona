@@ -61,7 +61,6 @@
 // respuesta de errores de clientes 400 al 499, cuando el fronter se equivoca, del que hizo la peticion, del desarrollador que hizo la pagina.
 // respuesta, de errores del servidor 500-599, backen, aca el backen se equivoco.
 
-
 // los errores mas frecuentes son los 200 al 299 y de 400 al 499
 
 // por ejemplo en nuestro primer estado nos da el status 200
@@ -71,10 +70,103 @@
 // estados de petesiones
 
 //API..
-// una aplicion web contruida desde el lado del servidor, es una api rest,
-//ejemplos de api pokeapi.co hay que leer la documentacion.
+// una aplicion web contruida desde el lado del servidor, es una arquitectura api rest,
+//ejemplos de api pokeapi.co hay que leer la documentacion, estudiar
 //API sque se llama JSONPlaceholder.typicode.com es una api que te permite crear publicaciones,
-// 
+// // apis gratis apilist.fun es una y la otra es api en git gub github.com/public-api-list/public-api-list
+// Api es un servidor y el JSON ES UN FORMATO, la Api te contesta las 24 hs del dia, y el Json es un formato donde trabajamos
+//
+
+
+// Fetch, el fetch simpre funciona con una  URL y una configuaracion
+//si no le pasamos una configuacion por defecto usa un GET.
+
+//traemos con el place holder : jsonplaceholder.typicode.com/guide/
+// ahi nos dice los recursos que podemos usar, url params tiene, nos podemos traer toda la lista,
+// si los pegamos en el navegador nos trae todos.
+// dentro de esta guia hay muchos mas-
+// entonces hacemos un console. log del fetchde esta url
+
+
+// console.log(fetch("https://jsonplaceholder.typicode.com/posts"));
+
+// si lo abro en el navegador, en la consola, nos dice que es una promesa y esta completada.
+// a las promesas las trabajamos con un then y un catch
+
+
+// en primer caso la promesa esta pendiente, todo es asyncrono
+
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then(response => console.log(response));
+
+// esto nos va a traer por consola, la promesa, no nos va traer la lista de la url.
+// el response es lo que trae nuestra informacion
+
+// pero como traemos todos los datos de esta url que tenemos,??
+
+// tyenemos que convertir la informacion en un JSON, como es asyncrono, puede que falle o que no.
+// le hacemos otro .then de la data, y asi sacamos lpos datos de la url.
+
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then(response => response.json())
+//      .then(data => console.log(data));
+
+// con esto le estamos haciendo la peticion al servidor.
+//si nos fijamos en el network dentro de la consola, nos tendria que dar wue todo salio bien, con un 200s
+// nos da 304 que son reedirecciones de paginas
+// nos dice GET porque nosotros no le pponemos nada, por defecto es un  get
+// asi traemos toda las informacion que querramos.
+
+// en la data si abrimos cualquiera nos trae un arreglo, nos da toda la informacion de cada uno y tenemos la informacion,
+// con esta informacion podemos hacer lo que querramos.
+
+
+// tambien podemos explorar un poco mas. y traer los datos mas simples y elegir.
+// que informacion queremos de ese servidor.
+// por ejemplo
+
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then(response => response.json())
+//      .then(data => {
+//         console.log(data[0].title);
+//         console.log(data[0].body);
+//      });
+
+
+// de esta menera traemos de este servidor el titulo y el body, y con esta infromacion hacemos lo que querramos
+
+// ahora armemoslo en html, creamos un titulo, una lista con un id con un listado
+
+// ahora vamos a renderizar todos los productos en el listado que tenemos en el html,
+// y lo pongamos en el sitio, que lol traiggamos el DOM.
+
+
+fetch("https://jsonplaceholder.typicode.com/posts")
+.then(response => response.json())
+     .then(data => {
+        
+     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
