@@ -111,11 +111,24 @@
 // .then(response => response.json())
 //      .then(data => console.log(data));
 
+
+// toda esta informacion la traemos del servidor de API. NO TENGO NINGUN DATO EN EL PROYECTO
+// ASI DE SIMPLE SE TRAEN LOS DATOS DE UN SERVIDOR EXTERNO
 // con esto le estamos haciendo la peticion al servidor.
 //si nos fijamos en el network dentro de la consola, nos tendria que dar wue todo salio bien, con un 200s
 // nos da 304 que son reedirecciones de paginas
 // nos dice GET porque nosotros no le pponemos nada, por defecto es un  get
 // asi traemos toda las informacion que querramos.
+//es un arreglo, y cada elemento que trajimos son un objeto:
+
+
+// body: "parrafo..."
+// id: 1;
+// title: "nombre"
+// userId: 1
+
+// con toda la informacion que tyraemos de la API, podemos poner todo lo que hemos aprendido hasta ahora,
+// hacer un filter, poder poner cualquier cosa que querramos
 
 // en la data si abrimos cualquiera nos trae un arreglo, nos da toda la informacion de cada uno y tenemos la informacion,
 // con esta informacion podemos hacer lo que querramos.
@@ -134,18 +147,239 @@
 
 
 // de esta menera traemos de este servidor el titulo y el body, y con esta infromacion hacemos lo que querramos
+// como en la funcion anterior trajimos toda la data, aca esécificamos que queremos de todo esa data que el servidor nos da.
 
 // ahora armemoslo en html, creamos un titulo, una lista con un id con un listado
 
 // ahora vamos a renderizar todos los productos en el listado que tenemos en el html,
-// y lo pongamos en el sitio, que lol traiggamos el DOM.
+// y lo pongamos en el sitio, que lo traigamos el DOM.
+// hay apis que nos traen productos, imagenes, de otros sitios, apis para mercado pago, asi se hacen pagos por ahi.
 
 
-fetch("https://jsonplaceholder.typicode.com/posts")
-.then(response => response.json())
-     .then(data => {
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then(response => response.json())
+//      .then(data => {
+//         let listado = document.getElementById("listado");
+//         data.forEach(item => {
+//           let li = document.createElement("li");
+//           li.innerHTML = `
+//                          <h1> Titulo: ${item.titulo} </h1>
+//                          <h2> id: ${item.id} </h2>
+//                          <p> Titulo: ${item.body} </p>
+//                          <b> Titulo: ${item.b} </b>
+//           `;
+
+//           listado.append(li);
+//         });
         
-     });
+//      });
+
+// // como sabemos que es un arreglo, por lo que vamos hacer primero es traer el conmtenemos de los datos que va a ser el id listado,
+// // creamos una variable let listado que sea igual a document.getElementById(),
+// // entonces a essa data le hacemos un forEach para que recorra todo los elementos que contituyan la data,
+// // dentro de este hacmos la logica con un item seguido de una arrow function, dentro de esta,
+// // creamos una variablr de let li que sea igual a document.creatElement(), para poder crear lo que queremos que se refleje en el DOM, 
+// //A ese li le vamos a agregar un inner.HTML, donde vamos a crear lo que queremos que se vea en el DOM,
+// // un h1 donde pondremos el titulo, h2 para el id, una p ´para el body, un b para el usuariom que lo creo,
+// // una vez creado esto necesitamos algo que traiga estos datos al padre, con un append del listado donde pondremos el li, entonces, 
+// // entonces el listado pasa a ser padre, y el li el hijo. Esto traera todos los datos l DOM y se mostrara en pantalla.
+
+
+// //ASI SE TRABAJA CON LA INFORMACION DE LOS SERVIDORES
+
+// // Ahora tambien podemos mandar informacion al servidor, como lo hacemos??}
+// //Para poder usar este recurso tendremos que hacer un metodo : POST ,
+// //Primero vamos a la documentacion  y buscamos post:
+// // y nos encontrarempos con el fetch de los post la ruta, y debajo de ste vamos a encontrar el parametro, 
+// // el metodo que es el "POST", seguido de body, que dentro de este estara un JSON.stringify,
+// // despues aparecera el titulo con el nombre, el body que va a ser el "bar", seguido del usuario: 1,
+// //Aca nos dice que tenemos que poner esto en las cabeceras donde aparecera un headers : {
+// //"content: type": "application/json; charset=UTF-8",
+// //},
+
+// // Ahora lo que vamos hacer con esta informacion:
+// // hacemos un fetch de con la ruta , despues dentro de esto entre llaves, metodo,body, y dentro de este vamos a poner title, el body( el body anterior es el bpdy de la peticion)
+// // seguimos con el usuario, y ahora le mandamos la cabeceras, el headers copiamos de la documentacion y lo pegamos en el codigo,
+// // el fetch ya qye es una promesa le pasamos .then con el response de la response.json() seguiente de otro then dentro de parentesispondremos la data,
+// // fecha y un console.log de data.
+
+
+// fetch("https://jsonplaceholder.typicode.com/posts", {
+//      method: "POST",
+//      body: JSON.stringify({
+//           title: "prueba",
+//           body: "probando la peticion",
+//           userId: 1,
+//      }),
+//      headers: {
+//           'Content-type': 'application/json; charset=UTF-8',
+//         },
+//       })
+//         .then((response) => response.json())
+//         .then((json) => console.log(json));
+
+//Este fetch agrega el elemento que creamos.
+// esto es lo que aparece en la consola, se agrego un elemento a la listya de la API.
+
+     //    {title: 'prueba', body: 'probando la peticion', userId: 1, id: 101}
+     //    body
+     //    : 
+     //    "probando la peticion"
+     //    id
+     //    : 
+     //    101
+     //    title
+     //    : 
+     //    "prueba"
+     //    userId
+     //    : 
+     //    1
+     //    [[Prototype]]
+     //    : 
+     //    Object
+
+// esto se crea como ejemplo despues se borra.
+
+// ahora para actualizar un PUT.
+
+
+// fetch('https://jsonplaceholder.typicode.com/posts/1', {
+//      method: 'PUT',
+//      body: JSON.stringify({
+//        id: 1,
+//        title: 'foo',
+//        body: 'bar',
+//        userId: 1,
+//      }),
+//      headers: {
+//        'Content-type': 'application/json; charset=UTF-8',
+//      },
+//    })
+//      .then((response) => response.json())
+//      .then((json) => console.log(json));
+
+
+// para hacer un PACH, parcheamos un recurso, arreglar
+
+
+// fetch('https://jsonplaceholder.typicode.com/posts/1', {
+//      method: 'PATCH',
+//      body: JSON.stringify({
+//        title: 'foo',
+//      }),
+//      headers: {
+//        'Content-type': 'application/json; charset=UTF-8',
+//      },
+//    })
+//      .then((response) => response.json())
+//      .then((json) => console.log(json));
+
+
+
+
+// para eliminar un recurso lo hacemos con el DELETE
+
+// fetch('https://jsonplaceholder.typicode.com/posts/1', {
+//      method: 'DELETE',
+//    });
+
+
+// es solo un simulador, en realidad no se puede eliminar, o sea, no se vera en la consola, ya que la API NO LO DEJA VER.
+
+// PARA FILTRAR UN ELEMENTO
+
+// fetch('https://jsonplaceholder.typicode.com/posts?userId=1')
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+
+
+// PARA HAY UNA LISTA DE RUTA ANIDADA
+
+// fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+
+// ahora vamos a crear un archivo JSON, con ls productos, con un arreglo, y le decimso que queremos traer esa data,
+// hacemos el fetch y dentro le ponemos la ruta en el cual estan los productos,
+// .then para traer la data response => responmse.JSON, Y despues la vam os a recorrer, y creo el li,
+//
+
+
+
+// fetch("./data.json")
+// .then(response => response.json())
+//      .then(data => {
+//         let listado = document.getElementById("listado");
+//         data.forEach(item => {
+//           let li = document.createElement("li");
+//           li.innerHTML = `
+//                          <h1> nombre: ${item.nombre} </h1>
+//                          <h2> id: ${item.id} </h2>
+//                          <p> Precio: ${item.precio} </p>          
+//           `;
+
+//           listado.append(li);
+//         });
+        
+//      });
+
+
+// de esta manera renderizamos todos los productos que tenemos en el archivo data.json,
+// lo traemos de un servidor externo o lo podemos traer desde un archivo nuestro y que se
+//refleje en el DOM.
+
+// Async away, cuando son peticiones anidades se hace muy denso, lo que hace el sync away loque hace.
+// necesitamos una funcion, como por ejemplo traer datos, lo que sucede aqui, con un arrow function, dentro de la funcion 
+// traemos la data de la API, ponemos una constante cons respuesta por ejemplo, que sea igual a away al fetch y la url,
+// no ponemos el fetch ponemos el away y espera a que resuelva, el away hace que espera mientras se resuelve,
+// hacemos otra const data que sea igual a await de la respuesta .json(), para que no nos de error, tendremos que poner,
+// delante de la arrow function un async, y ya nos va a dejar de decir error, es  mucho mas rapido y ahorramos muchas lineas,
+// entonces creamos una funcion, que sea igual a async ponemos contsntes con el await y nos ahorramos de poner el .then, despues 
+// pondremos todo igual como el .then.
+
+
+
+
+const traerDatos = async () => {
+     const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts")
+     const data = await respuesta.json();
+             let listado = document.getElementById("listado");
+             data.forEach(item => {
+               let li = document.createElement("li");
+               li.innerHTML = `
+                              <h1> Titulo: ${item.titulo} </h1>
+                              <h2> id: ${item.id} </h2>
+                              <p> Titulo: ${item.body} </p>
+                              <b> Titulo: ${item.userId} </b>
+               `;
+     
+               listado.append(li);
+             });
+             
+}
+traerDatos ();
+
+
+// de esta manera tambien traemos los datos, igual que con el punto then
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
